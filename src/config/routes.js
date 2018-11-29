@@ -6,7 +6,10 @@ import SplashScreen from '../screens/SplashScreen';
 const NavStack = createStackNavigator(
     {
         Splash: {
-            screen: SplashScreen
+            screen: SplashScreen,
+            navigationOptions: {
+                header: null
+            },
         },
     },
     {

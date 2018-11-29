@@ -7,7 +7,7 @@ import SplashAnimation from '../components/SplashAnimation';
 const SplashScreen = ({navigation}) => (
     <View style={styles.container} >
         <SplashAnimation navigation={navigation}>
-            <StatusBar backgroundColor="#28F1A6" />
+            <StatusBar hidden backgroundColor="#28F1A6" />
             <View style={styles.titleWrapper}>
                <Text style={styles.appName}>
                     Calendar App
@@ -49,11 +49,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     subtitle: {
-        fontSize: 26,
+        fontSize: 16,
         color: '#ffffff',
         justifyContent: 'center',
         alignItems: 'center',
-        fontWeight: 'bold'
     },
 });
 
