@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import SplashScreen from '../screens/SplashScreen';
+import CalendarScreeen from '../screens/CalendarScreen';
 
 const NavStack = createStackNavigator(
     {
@@ -11,9 +12,15 @@ const NavStack = createStackNavigator(
                 header: null
             },
         },
+        Calendar: {
+            screen: CalendarScreeen,
+            navigationOptions: {
+                title: 'Calendar',
+            },
+        },
     },
     {
-        initialRouteName: 'Splash',
+        initialRouteName: 'Calendar',
         navigationOptions: {
             headerStyle: {
                 backgroundColor: '#28F1A6',
@@ -22,9 +29,11 @@ const NavStack = createStackNavigator(
             },
             headerTintColor: '#333333',
             headerTitleStyle: {
-                fontWeight: 'bold'
+                fontWeight: 'bold',
+                color: '#ffffff'
             }
         }
+       
     }
 
 );

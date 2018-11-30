@@ -24,7 +24,7 @@ class SplashAnimation extends Component {
 
     navigateToWalkthrough = () => {
         const {navigation} = this.props;
-        navigation.navigate('Home');
+        navigation.replace('Calendar');
     }
 
     render() {
