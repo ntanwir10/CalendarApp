@@ -20,18 +20,18 @@ const NavStack = createStackNavigator(
         },
     },
     {
-        initialRouteName: 'Calendar',
-        navigationOptions: {
+        initialRouteName: 'Splash',
+        defaultNavigationOptions: {
             headerStyle: {
-                backgroundColor: '#28F1A6',
-                elevation: 0,
-                shadowOpacity: 0
-            },
-            headerTintColor: '#333333',
-            headerTitleStyle: {
-                fontWeight: 'bold',
-                color: '#ffffff'
-            }
+                    backgroundColor: '#28F1A6',
+                    elevation: 0,
+                    shadowOpacity: 0
+                },
+                headerTintColor: '#333333',
+                headerTitleStyle: {
+                    fontWeight: 'bold',
+                    color: '#ffffff'
+                }
         }
        
     }

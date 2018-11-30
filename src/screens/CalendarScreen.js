@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, StatusBar } from 'react-native';
+import { View, Text, StatusBar } from 'react-native';
 import PropTypes from 'prop-types';
 
 import Calendar from '../components/Calendar';
 
 const CalendarScreen = ({navigation}) => (
     <View >
-        <Calendar navigation={navigation}>
+        <Calendar  navigation={navigation}>
             <StatusBar backgroundColor="#28F1A6" />
-        </Calendar>
+        </Calendar >
     </View>
 );
 
