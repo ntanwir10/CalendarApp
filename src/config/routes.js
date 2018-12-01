@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import SplashScreen from '../screens/SplashScreen';
 import CalendarScreeen from '../screens/CalendarScreen';
+import AgendaScreen from '../screens/AgendaScreen';
 
 const NavStack = createStackNavigator(
     {
@@ -16,6 +17,12 @@ const NavStack = createStackNavigator(
             screen: CalendarScreeen,
             navigationOptions: {
                 title: 'Calendar',
+            },
+        },
+        Agenda: {
+            screen: AgendaScreen,
+            navigationOptions: {
+                title: 'Schedule',
             },
         },
     },
