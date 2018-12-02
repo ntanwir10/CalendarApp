@@ -34,7 +34,7 @@ const NavStack = createStackNavigator(
                     elevation: 0,
                     shadowOpacity: 0
                 },
-                headerTintColor: '#333333',
+                headerTintColor: '#ffffff',
                 headerTitleStyle: {
                     fontWeight: 'bold',
                     color: '#ffffff'

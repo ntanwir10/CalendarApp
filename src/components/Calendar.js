@@ -5,19 +5,25 @@ import { Icon } from 'native-base';
 import { CalendarList } from 'react-native-calendars';
 
 class Calendar extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {}
     }
     render() { 
         return ( 
             <View>
                 <CalendarList 
-                    theme={{ todayTextColor: '#28F1A6' }}
+                    
                     pastScrollRange={10}
                     futureScrollRange={12}
                     scrollEnabled={true}
                     showScrollIndicator={true}
+                    theme = {
+                        {
+                            todayTextColor: '#28F1A6',
+                            selectedDayBackgroundColor: '#28F1A6',
+                        }
+                    }
                 />
                 <TouchableHighlight underlayColor={'#EEE'} style={styles.calendarArrowWrapper} onPress={() =>       this.props.navigation.navigate('Agenda')}>
                     <Icon style={styles.calendarForwardArrow} type='MaterialIcons' name='view-week' />
