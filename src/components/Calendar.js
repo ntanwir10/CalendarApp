@@ -1,20 +1,22 @@
 import React, { Component } from 'react';
 import { View, TouchableHighlight, StyleSheet } from 'react-native';
-import { Icon } from 'native-base';
+import { Fab, Icon } from 'native-base';
 
 import { CalendarList } from 'react-native-calendars';
 
 class Calendar extends Component {
     constructor(props) {
         super(props);
-        this.state = {}
+         this.state = {
+             active: 'true'
+         };
     }
     render() { 
         return ( 
             <View>
                 <CalendarList 
                     
-                    pastScrollRange={10}
+                    pastScrollRange={12}
                     futureScrollRange={12}
                     scrollEnabled={true}
                     showScrollIndicator={true}
@@ -28,6 +30,17 @@ class Calendar extends Component {
                 <TouchableHighlight underlayColor={'#EEE'} style={styles.calendarArrowWrapper} onPress={() =>       this.props.navigation.navigate('Agenda')}>
                     <Icon style={styles.calendarForwardArrow} type='MaterialIcons' name='view-week' />
                 </TouchableHighlight>
+                <View style={{flex: 1}}>
+                    <Fab
+                        active={!this.state.active}
+                        direction="up"
+                        containerStyle={{ }}
+                        style={{ backgroundColor: '#28F1A6'}}
+                        position = 'bottomRight'
+                        onPress={() => this.setState({ active: !this.state.active })}>
+                        <Icon type='MaterialCommunityIcons' name="reminder" />
+                    </Fab>
+                </View>
             </View>
          );
     }

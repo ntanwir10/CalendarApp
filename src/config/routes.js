@@ -22,7 +22,7 @@ const NavStack = createStackNavigator(
         Agenda: {
             screen: AgendaScreen,
             navigationOptions: {
-                title: 'Schedule',
+                title: 'Weekyly Schedule',
             },
         },
     },
