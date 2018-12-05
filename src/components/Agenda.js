@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { Fab, Icon } from 'native-base';
 import { Agenda } from 'react-native-calendars';
 import PropTypes from 'prop-types';
@@ -15,6 +15,7 @@ class WeeklyAgenda extends Component {
     return (
         <View style={{height:600}}>
              <Agenda
+                onDayPress={(day) => {{ onSelect(day, navigation) }}}
                 items={this.state.items}
                 loadItemsForMonth={this.loadItems.bind(this)}
                 selected={Date()}
@@ -79,7 +80,11 @@ class WeeklyAgenda extends Component {
 
   renderItem(item) {
     return (
-      <View style={[styles.item, {height: item.height}]}><Text>{item.name}</Text></View>
+      <View style={[styles.item, {height: item.height}]}>
+        <TouchableOpacity onPress={(selected) => {this.props.navigation.navigate('Reminder', selected)}}>
+          <Text>{item.name}</Text>
+        </TouchableOpacity>
+      </View>
     );
   }
 

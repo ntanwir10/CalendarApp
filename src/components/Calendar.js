@@ -8,8 +8,8 @@ class Calendar extends Component {
     constructor(props) {
         super(props);
          this.state = {
-             active: 'true'
-         }
+            active: 'true'
+        }
     }
 
     render() { 
@@ -18,7 +18,6 @@ class Calendar extends Component {
             <View>
                 <CalendarList
                     onDayPress={(day) => {{ onSelect(day, navigation) }}}
-
                     pastScrollRange={12}
                     futureScrollRange={12}
                     scrollEnabled={true}
@@ -28,9 +27,7 @@ class Calendar extends Component {
                             todayTextColor: '#28F1A6',
                         }
                     }
-                    
-
-            />
+                />
                 <TouchableHighlight underlayColor={'#EEE'} style={styles.calendarArrowWrapper} onPress={() => navigation.navigate('Agenda')}>
                     <Icon style={styles.calendarForwardArrow} type='MaterialIcons' name='view-week' />
                 </TouchableHighlight>

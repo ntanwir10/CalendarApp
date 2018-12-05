@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View,StyleSheet } from 'react-native';
+import { View,StyleSheet, Alert } from 'react-native';
 import {
     Form,
     Item,
@@ -8,14 +8,13 @@ import {
     DatePicker, Text
 } from 'native-base';
 import PropTypes from 'prop-types';
-
 class Reminder extends Component {
     constructor(props) {
         super(props);
-         this.state = {
-             chosenDate: new Date()
-         };
-         this.setDate = this.setDate.bind(this);
+        this.state = {
+        chosenDate: new Date()
+        };
+        this.setDate = this.setDate.bind(this);
     }
 
     setDate(newDate) {
@@ -36,7 +35,6 @@ class Reminder extends Component {
                         <Item>
                             <Input placeholder="Set your reminder" />
                         </Item>
-                        
                         <DatePicker
                             defaultDate={new Date()}
                             minimumDate={new Date(2018, 1, 1)}
@@ -50,7 +48,6 @@ class Reminder extends Component {
                             textStyle={{ color: "green" }}
                             placeHolderTextStyle={{ color: "#d3d3d3" }}
                             onDateChange={this.setDate}
-                            
                         />
                         <Text style={styles.datePicker}>
                             {this.state.chosenDate.toString().substr(4, 12)}
@@ -58,7 +55,7 @@ class Reminder extends Component {
                     </View>
                     <View style={styles.footer}>
                         <Button block success style={styles.saveBtn} 
-                            onPress={() => {show('Successfully saved!', 2000);}}>
+                           onPress={() => Alert.alert('Succefully Saved.')} >
                             <Icon type='MaterialIcons' name='done' />                        
                         </Button>
                         <Button block  danger style={styles.cancelBtn} 
