@@ -4,6 +4,7 @@ import { createStackNavigator, createAppContainer } from "react-navigation";
 import SplashScreen from '../screens/SplashScreen';
 import CalendarScreeen from '../screens/CalendarScreen';
 import AgendaScreen from '../screens/AgendaScreen';
+import ReminderScreen from '../screens/ReminderScreen';
 
 const NavStack = createStackNavigator(
     {
@@ -23,6 +24,12 @@ const NavStack = createStackNavigator(
             screen: AgendaScreen,
             navigationOptions: {
                 title: 'Weekyly Schedule',
+            },
+        },
+        Reminder: {
+            screen: ReminderScreen,
+            navigationOptions: {
+                title: 'Reminder',
             },
         },
     },

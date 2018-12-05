@@ -1,21 +1,24 @@
 import React, { Component } from 'react';
 import { View, TouchableHighlight, StyleSheet } from 'react-native';
 import { Fab, Icon } from 'native-base';
+import PropTypes from 'prop-types';
 
 import { CalendarList } from 'react-native-calendars';
-
 class Calendar extends Component {
     constructor(props) {
         super(props);
          this.state = {
              active: 'true'
-         };
+         }
     }
+
     render() { 
+        const {onSelect, navigation} = this.props;
         return ( 
             <View>
-                <CalendarList 
-                    
+                <CalendarList
+                    onDayPress={(day) => {{ onSelect(day, navigation) }}}
+
                     pastScrollRange={12}
                     futureScrollRange={12}
                     scrollEnabled={true}
@@ -23,27 +26,31 @@ class Calendar extends Component {
                     theme = {
                         {
                             todayTextColor: '#28F1A6',
-                            selectedDayBackgroundColor: '#28F1A6',
                         }
                     }
-                />
-                <TouchableHighlight underlayColor={'#EEE'} style={styles.calendarArrowWrapper} onPress={() =>       this.props.navigation.navigate('Agenda')}>
+                    
+
+            />
+                <TouchableHighlight underlayColor={'#EEE'} style={styles.calendarArrowWrapper} onPress={() => navigation.navigate('Agenda')}>
                     <Icon style={styles.calendarForwardArrow} type='MaterialIcons' name='view-week' />
                 </TouchableHighlight>
-                <View style={{flex: 1}}>
+                <View >
                     <Fab
                         active={!this.state.active}
                         direction="up"
-                        containerStyle={{ }}
                         style={{ backgroundColor: '#28F1A6'}}
                         position = 'bottomRight'
-                        onPress={() => this.setState({ active: !this.state.active })}>
+                        onPress={() => navigation.navigate('Reminder')}>
                         <Icon type='MaterialCommunityIcons' name="reminder" />
                     </Fab>
                 </View>
             </View>
          );
     }
+}
+
+Calendar.propTypes = {
+    onSelect: PropTypes.func,
 }
 
 const styles = StyleSheet.create({

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
-
+import { Fab, Icon } from 'native-base';
 import { Agenda } from 'react-native-calendars';
-
+import PropTypes from 'prop-types';
 class WeeklyAgenda extends Component {
     constructor(props) {
     super(props);
@@ -21,6 +21,11 @@ class WeeklyAgenda extends Component {
                 renderItem={this.renderItem.bind(this)}
                 renderEmptyDate={this.renderEmptyDate.bind(this)}
                 rowHasChanged={this.rowHasChanged.bind(this)}
+                onRefresh = {() => { this.setState({refeshing : true})}}
+                refreshing = {this.state.refreshing}
+                refreshControl = {null}
+                pastScrollRange={1}
+                futureScrollRange = {3}
                 theme = {
                   {
                     agendaTodayColor: '#28F1A6',
@@ -31,6 +36,16 @@ class WeeklyAgenda extends Component {
                   }
                 }
             />
+            <View >
+                <Fab
+                    active={!this.state.active}
+                    direction="up"
+                    style={{ backgroundColor: '#28F1A6'}}
+                    position = 'bottomRight'
+                    onPress={() => this.props.navigation.navigate('Reminder')}>
+                    <Icon type='MaterialCommunityIcons' name="reminder" />
+                </Fab>
+            </View>
         </View>
      
     );

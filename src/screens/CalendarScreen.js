@@ -6,7 +6,9 @@ import Calendar from '../components/Calendar';
 
 const CalendarScreen = ({navigation}) => (
     <View >
-        <Calendar  navigation={navigation}>
+        <Calendar  navigation={navigation} 
+            onSelect={(day, navigation)=>{
+            navigation.navigate('Agenda', {day}) }}>
             <StatusBar backgroundColor="#28F1A6" />
         </Calendar >
     </View>

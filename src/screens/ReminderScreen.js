@@ -1,22 +1,19 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Button } from 'native-base';
+import { View, StatusBar } from 'react-native';
 import PropTypes from 'prop-types';
 
-class ReminderScreen extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {  }
-    }
-    render() { 
-        const {navigation} = this.props;
-        return (
-            <View>
-                <Button>
-                </Button>
-            </View>
-        );
-    }
+import Reminder from '../components/Reminder';
+
+const ReminderScreen = ({navigation}) => (
+    <View >
+        <Reminder navigation={navigation} >
+            <StatusBar backgroundColor = "#28F1A6" />
+         </Reminder >
+    </View>
+);
+
+Reminder.propTypes = {
+    navigation: PropTypes.object.isRequired
 }
 
 export default ReminderScreen;
