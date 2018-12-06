@@ -13,42 +13,40 @@ class WeeklyAgenda extends Component {
 
   render() {
     return (
-        <View style={{height:600}}>
-             <Agenda
-                onDayPress={(day) => {{ onSelect(day, navigation) }}}
-                items={this.state.items}
-                loadItemsForMonth={this.loadItems.bind(this)}
-                selected={Date()}
-                renderItem={this.renderItem.bind(this)}
-                renderEmptyDate={this.renderEmptyDate.bind(this)}
-                rowHasChanged={this.rowHasChanged.bind(this)}
-                onRefresh = {() => { this.setState({refeshing : true})}}
-                refreshing = {this.state.refreshing}
-                refreshControl = {null}
-                pastScrollRange={1}
-                futureScrollRange = {3}
-                theme = {
-                  {
-                    agendaTodayColor: '#28F1A6',
-                    agendaKnobColor: '#28F1A6',
-                    dotColor: '#28F1A6',
-                    selectedDayBackgroundColor: '#28F1A6',
-                    todayTextColor: '#28F1A6',
-                  }
+      <View style={{height:600}}>
+            <Agenda
+              items={this.state.items}
+              loadItemsForMonth={this.loadItems.bind(this)}
+              selected={this.props.day}
+              renderItem={this.renderItem.bind(this)}
+              renderEmptyDate={this.renderEmptyDate.bind(this)}
+              rowHasChanged={this.rowHasChanged.bind(this)}
+              onRefresh = {() => { this.setState({refeshing : true})}}
+              refreshing = {this.state.refreshing}
+              refreshControl = {null}
+              pastScrollRange={1}
+              futureScrollRange = {3}
+              theme = {
+                {
+                  agendaTodayColor: '#28F1A6',
+                  agendaKnobColor: '#28F1A6',
+                  dotColor: '#28F1A6',
+                  selectedDayBackgroundColor: '#28F1A6',
+                  todayTextColor: '#28F1A6',
                 }
-            />
-            <View >
-                <Fab
-                    active={!this.state.active}
-                    direction="up"
-                    style={{ backgroundColor: '#28F1A6'}}
-                    position = 'bottomRight'
-                    onPress={() => this.props.navigation.navigate('Reminder')}>
-                    <Icon type='MaterialCommunityIcons' name="reminder" />
-                </Fab>
-            </View>
-        </View>
-     
+              }
+          />
+          <View >
+              <Fab
+                  active={!this.state.active}
+                  direction="up"
+                  style={{ backgroundColor: '#28F1A6'}}
+                  position = 'bottomRight'
+                  onPress={() => this.props.navigation.navigate('Reminder')}>
+                  <Icon type='MaterialCommunityIcons' name="reminder" />
+              </Fab>
+          </View>
+      </View>
     );
   }
 
@@ -78,10 +76,20 @@ class WeeklyAgenda extends Component {
     // console.log(`Load Items for ${day.year}-${day.month}`);
   }
 
+  // loadItems = (day) => {
+  //   this.setState({selectedDate: day});
+  //   const newItems = {};
+  //   Object.keys(this.state.items).forEach(key => {newItems[key] = this.state.items[key];});
+  //   this.setState({
+  //     items: newItems
+  //   });
+  //   this.state.items;
+  // };
+
   renderItem(item) {
     return (
       <View style={[styles.item, {height: item.height}]}>
-        <TouchableOpacity onPress={(selected) => {this.props.navigation.navigate('Reminder', selected)}}>
+        <TouchableOpacity onPress={() => {this.props.navigation.navigate('Reminder')}}>
           <Text>{item.name}</Text>
         </TouchableOpacity>
       </View>
@@ -90,7 +98,12 @@ class WeeklyAgenda extends Component {
 
   renderEmptyDate() {
     return (
-      <View style={styles.emptyDate}><Text> No Event or Reminder on this date </Text></View>
+      <View style={styles.emptyDate}>
+        <TouchableOpacity onPress={() => {this.props.navigation.navigate('Reminder')}}>
+          <Text> No Event or Reminder on this date </Text>
+        </TouchableOpacity>
+      </View>
+      
     );
   }
 

@@ -17,6 +17,8 @@ class Calendar extends Component {
         return ( 
             <View>
                 <CalendarList
+                    markedDates={{[this.state.selected]: {selected: true, disableTouchEvent: true, selectedDotColor: 'green'}}}
+                    markingType={'multi-dot'}
                     onDayPress={(day) => {{ onSelect(day, navigation) }}}
                     pastScrollRange={12}
                     futureScrollRange={12}
@@ -28,7 +30,7 @@ class Calendar extends Component {
                         }
                     }
                 />
-                <TouchableHighlight underlayColor={'#EEE'} style={styles.calendarArrowWrapper} onPress={() => navigation.navigate('Agenda')}>
+                <TouchableHighlight underlayColor={'#EEE'} style={styles.calendarArrowWrapper} onPress={(day) => navigation.navigate('Agenda', day)}>
                     <Icon style={styles.calendarForwardArrow} type='MaterialIcons' name='view-week' />
                 </TouchableHighlight>
                 <View >

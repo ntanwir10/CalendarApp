@@ -28,10 +28,6 @@ class Reminder extends Component {
             <View>
                 <Form style={styles.formContainer}>
                     <View style={styles.formView}>
-                        <Button transparent style={styles.editBtn}>
-                            <Icon style={styles.editIcon} type='MaterialIcons' name='edit' />
-                        </Button>
-                       
                         <Item>
                             <Input placeholder="Set your reminder" />
                         </Item>
