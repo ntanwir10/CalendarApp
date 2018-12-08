@@ -28,13 +28,6 @@ class Reminder extends Component {
         this.setState({input:text});
     }
 
-    //On application loads, this will get the already saved data and set the state true when it's true.
-    componentDidMount() {
-        AsyncStorage.getItem("key").then((value) => {
-            this.setState(JSON.parse(value));
-        }).done();
-    }
-
     //save the input
     saveData() {
         AsyncStorage.setItem("key", JSON.stringify(this.state));
@@ -66,7 +59,7 @@ class Reminder extends Component {
                             onDateChange={this.setDate}
                         />
                         <Text style={styles.datePicker}>
-                            {this.state.chosenDate.toString().substring(0,10)}
+                            {this.state.chosenDate.toString().substring(4,15)}
                         </Text>
                     </View>
                     <View style={styles.footer}>
