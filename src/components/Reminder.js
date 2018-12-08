@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { View,StyleSheet, Alert } from 'react-native';
+import { View,StyleSheet, AsyncStorage, TextInput } from 'react-native';
 import {
     Form,
-    Item,
-    Input,
     Button, Icon,
     DatePicker, Text
 } from 'native-base';
@@ -12,9 +10,12 @@ class Reminder extends Component {
     constructor(props) {
         super(props);
         this.state = {
-        chosenDate: new Date()
+            input: '',
+            chosenDate: new Date(),
         };
         this.setDate = this.setDate.bind(this);
+        this.handleChangeInput = this.handleChangeInput.bind(this);
+        this.saveData = this.saveData.bind(this);
     }
 
     setDate(newDate) {
@@ -22,15 +23,34 @@ class Reminder extends Component {
             chosenDate: newDate
         });
     }
-    
+
+    handleChangeInput = (text) =>  {
+        this.setState({input:text});
+    }
+
+    //On application loads, this will get the already saved data and set the state true when it's true.
+    componentDidMount() {
+        AsyncStorage.getItem("key").then((value) => {
+            this.setState(JSON.parse(value));
+        }).done();
+    }
+
+    //save the input
+    saveData() {
+        AsyncStorage.setItem("key", JSON.stringify(this.state));
+    }
     render() { 
         return ( 
             <View>
                 <Form style={styles.formContainer}>
                     <View style={styles.formView}>
-                        <Item>
-                            <Input placeholder="Set your reminder" />
-                        </Item>
+
+                            < TextInput
+                            placeholder = "Set your reminder"
+                            onChangeText={this.handleChangeInput}
+                            value={this.state.input}
+                            />
+
                         <DatePicker
                             defaultDate={new Date()}
                             minimumDate={new Date(2018, 1, 1)}
@@ -46,17 +66,19 @@ class Reminder extends Component {
                             onDateChange={this.setDate}
                         />
                         <Text style={styles.datePicker}>
-                            {this.state.chosenDate.toString().substr(4, 12)}
+                            {this.state.chosenDate.toString().substring(0,10)}
                         </Text>
                     </View>
                     <View style={styles.footer}>
                         <Button block success style={styles.saveBtn} 
-                           onPress={() => Alert.alert('Succefully Saved.')} >
+                        onPress={ () => 
+                            {
+                              this.saveData()
+                              console.log('save data',this.state);
+                            }
+                        } 
+                           >
                             <Icon type='MaterialIcons' name='done' />                        
-                        </Button>
-                        <Button block  danger style={styles.cancelBtn} 
-                           onPress={() => {this.props.navigation.navigate('Agenda')}} >
-                            <Icon type='MaterialIcons' name='cancel' />                         
                         </Button>
                     </View>
                 </Form>
@@ -88,9 +110,8 @@ const styles = StyleSheet.create({
     },
     saveBtn: {
         position:'relative',
-        marginBottom: 10,
+        marginTop: 35,
     }
-    
 });
- 
+
 export default Reminder;
