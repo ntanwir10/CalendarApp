@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View,StyleSheet, AsyncStorage, TextInput } from 'react-native';
+import { View,StyleSheet, AsyncStorage, TextInput, Alert } from 'react-native';
 import {
     Form,
     Button, Icon,
@@ -68,6 +68,7 @@ class Reminder extends Component {
                             {
                               this.saveData()
                               console.log('save data',this.state);
+                              Alert.alert('Yay!!', 'Succefully saved.')
                             }
                         } 
                            >

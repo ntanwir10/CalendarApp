@@ -8,7 +8,8 @@ class Calendar extends Component {
     constructor(props) {
         super(props);
          this.state = {
-            active: 'true'
+            active: 'true',
+            selected:''
         }
     }
 
@@ -17,8 +18,7 @@ class Calendar extends Component {
         return ( 
             <View>
                 <CalendarList
-                    markedDates={{[this.state.selected]: {selected: true, disableTouchEvent: true, selectedDotColor: 'green'}}}
-                    markingType={'multi-dot'}
+                    markingType={'period'}
                     onDayPress={(day) => {{ onSelect(day, navigation) }}}
                     pastScrollRange={12}
                     futureScrollRange={12}
