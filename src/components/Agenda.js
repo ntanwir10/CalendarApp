@@ -52,70 +52,72 @@ class WeeklyAgenda extends Component {
       );
     }
 
-    //On application loads, this will get the already saved data and set the state true when it's true.
-    // componentDidMount() {
-    //     AsyncStorage.getItem("key").then((newItems) => {
-    //     console.log('checking new items', newItems);
-    //         this.setState({ items: JSON.parse(newItems) });
-    //     });
-    // }
+    
 
-    loadItems(day) {
-    setTimeout(() => {
-      for (let i = -15; i < 85; i++) {
-        const time = day.timestamp + i * 24 * 60 * 60 * 1000;
-        const strTime = this.timeToString(time);
-        if (!this.state.items[strTime]) {
-          this.state.items[strTime] = [];
-          const numItems = Math.floor(Math.random() * 5);
-          for (let j = 0; j < numItems; j++) {
-            this.state.items[strTime].push({
-              name: 'Item for ' + strTime,
-              height: Math.max(50, Math.floor(Math.random() * 150))
-            });
-          }
-        }
-      }
-      //console.log(this.state.items);
+  //   loadItems(day) {
+  //   setTimeout(() => {
+  //     for (let i = -15; i < 85; i++) {
+  //       const time = day.timestamp + i * 24 * 60 * 60 * 1000;
+  //       const strTime = this.timeToString(time);
+  //       if (!this.state.items[strTime]) {
+  //         this.state.items[strTime] = [];
+  //         const numItems = Math.floor(Math.random() * 5);
+  //         for (let j = 0; j < numItems; j++) {
+  //           this.state.items[strTime].push({
+  //             name: 'Item for ' + strTime,
+  //             height: Math.max(50, Math.floor(Math.random() * 150))
+  //           });
+  //         }
+  //       }
+  //     }
+  //     //console.log(this.state.items);
+  //     const newItems = {};
+  //     Object.keys(this.state.items).forEach(key => {newItems[key] = this.state.items[key];});
+  //     this.setState({
+  //       items: newItems
+  //     });
+  //   }, 1000);
+  //   // console.log(`Load Items for ${day.year}-${day.month}`);
+  // }
+
+  // renderItem(item) {
+  //   return (
+  //     <View style={[styles.item, {height: item.height}]}>
+  //       <TouchableOpacity onPress={(date) => {this.props.navigation.navigate('Reminder',date)}}>
+  //         <Text>{item.name}</Text>
+  //       </TouchableOpacity>
+  //     </View>
+  //   );
+  // }
+    
+  /** my attempt starts*/
+  //On application loads, this will get the already saved data and set the state true when it's true.
+    componentDidMount() {
+        AsyncStorage.getItem("key").then((newItems) => {
+        console.log('checking new items', newItems);
+            this.setState({ items: JSON.parse(newItems) });
+        });
+    }
+    loadItems(day)  {
+      //console.log('day', day);
       const newItems = {};
-      Object.keys(this.state.items).forEach(key => {newItems[key] = this.state.items[key];});
+      Object.keys(this.state.items).forEach(key => {
+        newItems[key] = this.state.items[key];
+      });
       this.setState({
         items: newItems
       });
-    }, 1000);
-    // console.log(`Load Items for ${day.year}-${day.month}`);
-  }
-
-  renderItem(item) {
-    return (
-      <View style={[styles.item, {height: item.height}]}>
-        <TouchableOpacity onPress={(date) => {this.props.navigation.navigate('Reminder',date)}}>
-          <Text>{item.name}</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  }
-    
-  /** my attempt starts*/
-    // loadItems(day)  {
-    //   console.log('day', day);
-    //   const newItems = {};
-    //   Object.keys(this.state.items).forEach(key => {
-    //     newItems[key] = this.state.items[key];
-    //   });
-    //   this.setState({
-    //     items: newItems
-    //   });
-    // } 
-    
-    // renderItem(items) {
-    //   items.map(item => {
-    //       return (
-    //         //assuming that item object comes with an id if not you must add a unique key so you can call a func that updates a count variable and returns it
-    //         <Text key={item.id}>{item.name} {item.date}</Text>
-    //       );
-    //   });
-    // }
+    } 
+   
+    renderItem(item) {
+      console.log('render item');
+      //items.map(item => {
+          return (
+            //assuming that item object comes with an id if not you must add a unique key so you can call a func that updates a count variable and returns it
+            <Text key={item.id}>{item.name} {item.date}</Text>
+          );
+      //});
+    }
   /** my attempt ends*/
 
     renderEmptyDate() {

@@ -7,30 +7,37 @@ import {
 } from 'native-base';
 import PropTypes from 'prop-types';
 class Reminder extends Component {
+   
     constructor(props) {
         super(props);
+        let formatDate = new Date();
         this.state = {
-            input: '',
-            chosenDate: new Date(),
+            chosenDate: formatDate.toISOString().split('T')[0],
+            text: '',
         };
-        this.setDate = this.setDate.bind(this);
+        
+        //this.setDate = this.setDate.bind(this);
         this.handleChangeInput = this.handleChangeInput.bind(this);
         this.saveData = this.saveData.bind(this);
     }
 
-    setDate(newDate) {
-        this.setState({
-            chosenDate: newDate
-        });
-    }
+    // setDate(newDate) {
+    //     this.setState({
+    //         chosenDate: newDate
+    //     });
+    // }
 
-    handleChangeInput = (text) =>  {
-        this.setState({input:text});
+    handleChangeInput = (input) =>  {
+        this.setState({text:input});
     }
 
     //save the input
     saveData() {
-        AsyncStorage.setItem("key", JSON.stringify(this.state));
+        let {chosenDate, ...restOfState} =  this.state;
+        let textArray = Object.entries(restOfState).map(([key, value])=> ({[key]: value}));
+        let fomattedState = {[chosenDate]:textArray};
+        console.log('formatted state', fomattedState);
+        AsyncStorage.setItem("key", JSON.stringify(this.fomattedState));
     }
     render() { 
         return ( 
@@ -41,7 +48,7 @@ class Reminder extends Component {
                             < TextInput
                             placeholder = "Set your reminder"
                             onChangeText={this.handleChangeInput}
-                            value={this.state.input}
+                            value={this.state.text}
                             />
 
                         <DatePicker
@@ -56,18 +63,19 @@ class Reminder extends Component {
                             placeHolderText="Select date"
                             textStyle={{ color: "green" }}
                             placeHolderTextStyle={{ color: "#d3d3d3" }}
-                            onDateChange={this.setDate}
+                            // onDateChange={this.setDate}
                         />
                         <Text style={styles.datePicker}>
-                            {this.state.chosenDate.toString().substring(4,15)}
+                            {this.state.chosenDate}
                         </Text>
                     </View>
                     <View style={styles.footer}>
                         <Button block success style={styles.saveBtn} 
                         onPress={ () => 
+
                             {
                               this.saveData()
-                              console.log('save data',this.state);
+                              //console.log('save data', fomattedState);
                               Alert.alert('Yay!!', 'Succefully saved.')
                             }
                         } 
@@ -92,7 +100,7 @@ const styles = StyleSheet.create({
     },
     editBtn:{
         flex: 1,
-        alignSelf: 'flex-end',
+        alignSelf: 'flex-end', 
     }, 
     datePicker:{
         alignSelf: 'auto',
