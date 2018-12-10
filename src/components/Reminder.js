@@ -16,19 +16,60 @@ class Reminder extends Component {
             text: '',
         };
         
-        //this.setDate = this.setDate.bind(this);
         this.handleChangeInput = this.handleChangeInput.bind(this);
         this.saveData = this.saveData.bind(this);
     }
 
-    // setDate(newDate) {
-    //     this.setState({
-    //         chosenDate: newDate
-    //     });
-    // }
+   
 
-    handleChangeInput = (input) =>  {
-        this.setState({text:input});
+    render() { 
+        const {chosenDate} = this.state;
+        return ( 
+            <View>
+                <Form style={styles.formContainer}>
+                    <View style={styles.formView}>
+
+                        < TextInput
+                            placeholder = "Set your reminder"
+                            onChangeText={this.handleChangeInput}
+                            value={this.state.text}
+                        />
+
+                        <DatePicker
+                            defaultDate = {new Date()}
+                            animationType={"fade"}
+                            androidMode={"default"}
+                            placeHolderText="Select date"
+                            textStyle={{ color: "green" }}
+                            placeHolderTextStyle={{ color: "#d3d3d3" }}
+                            onDateChange={()=>this.setState(new Date())}
+                        />
+                        <Text style={styles.datePicker}>
+                            {chosenDate}
+                        </Text>
+                    </View>
+                    <View style={styles.footer}>
+                        <Button block success style={styles.saveBtn} 
+                            onPress={ () => 
+                                    {
+                                    this.saveData()
+                                    //console.log('save data', fomattedState);
+                                    Alert.alert('Yay!!', 'Succefully saved.')
+                                    }
+                                } 
+                           >
+                            <Icon type='MaterialIcons' name='done' />                        
+                        </Button>
+                    </View>
+                </Form>
+            </View> 
+        );
+    }
+
+    handleChangeInput = (input) => {
+        this.setState({
+            text: input
+        });
     }
 
     //save the input
@@ -38,54 +79,6 @@ class Reminder extends Component {
         let fomattedState = {[chosenDate]:textArray};
         console.log('formatted state', fomattedState);
         AsyncStorage.setItem("key", JSON.stringify(this.fomattedState));
-    }
-    render() { 
-        return ( 
-            <View>
-                <Form style={styles.formContainer}>
-                    <View style={styles.formView}>
-
-                            < TextInput
-                            placeholder = "Set your reminder"
-                            onChangeText={this.handleChangeInput}
-                            value={this.state.text}
-                            />
-
-                        <DatePicker
-                            defaultDate={new Date()}
-                            minimumDate={new Date(2018, 1, 1)}
-                            maximumDate={new Date(2019, 12, 31)}
-                            locale={"en"}
-                            timeZoneOffsetInMinutes={undefined}
-                            modalTransparent={false}
-                            animationType={"fade"}
-                            androidMode={"default"}
-                            placeHolderText="Select date"
-                            textStyle={{ color: "green" }}
-                            placeHolderTextStyle={{ color: "#d3d3d3" }}
-                            // onDateChange={this.setDate}
-                        />
-                        <Text style={styles.datePicker}>
-                            {this.state.chosenDate}
-                        </Text>
-                    </View>
-                    <View style={styles.footer}>
-                        <Button block success style={styles.saveBtn} 
-                        onPress={ () => 
-
-                            {
-                              this.saveData()
-                              //console.log('save data', fomattedState);
-                              Alert.alert('Yay!!', 'Succefully saved.')
-                            }
-                        } 
-                           >
-                            <Icon type='MaterialIcons' name='done' />                        
-                        </Button>
-                    </View>
-                </Form>
-            </View> 
-        );
     }
 }
 
