@@ -11,5 +11,3 @@
 2. npm install
 3. This is a react-native init app. So, expo commands will not work. To run this app on emulator or physical device, run react-native run-android for Android or react-native run-ios for iOS.
 
-
-## this is work under progress
