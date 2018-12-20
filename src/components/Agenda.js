@@ -44,7 +44,7 @@ class WeeklyAgenda extends Component {
                   direction="up"
                   style={{ backgroundColor: '#28F1A6'}}
                   position = 'bottomRight'
-                  onPress={() => this.props.navigation.navigate('Reminder')}>
+                  onPress={() => this.props.navigation.navigate('Reminder', {selectedDay: this.props.day["dateString"]})}>
                   <Icon type='MaterialCommunityIcons' name="reminder" />
                 </Fab>
             </View>
